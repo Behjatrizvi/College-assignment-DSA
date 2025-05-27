@@ -1,0 +1,37 @@
+import java.util.*;
+
+public class TopThreeCandidates {
+
+    public static void findTopThree(int[] arr) {
+        if (arr.length < 3) {
+            System.out.println("Array must have at least three elements.");
+            return;
+        }
+
+        Integer first = null, second = null, third = null;
+
+        for (int num : arr) {
+            if (first == null || num > first) {
+                third = second;
+                second = first;
+                first = num;
+            } else if ((second == null || num > second) && num != first) {
+                third = second;
+                second = num;
+            } else if ((third == null || num > third) && num != second && num != first) {
+                third = num;
+            }
+        }
+
+        if (first != null && second != null && third != null) {
+            System.out.println("Top 3 candidates are: " + first + ", " + second + ", " + third);
+        } else {
+            System.out.println("Not enough unique candidates.");
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] candidates = {85, 92, 77, 92, 89, 100, 77};
+        findTopThree(candidates);
+    }
+}
